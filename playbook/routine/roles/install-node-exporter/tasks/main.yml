@@ -19,7 +19,7 @@
 
 - name: 拷贝node-exporter 安装包到临时目录
   copy:
-      src: "node-exporter_1.0_all.deb"
+      src: "node-exporter_1.1_all.deb"
       dest: /tmp/
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
