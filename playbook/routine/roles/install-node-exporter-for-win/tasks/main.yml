@@ -1,0 +1,25 @@
+- name: 拷贝64bit msi安装文件到临时目录
+  win_copy:
+      src: "wmi_exporter-0.2.7-amd64.msi"
+      dest: c:\wmi_exporter-0.2.7-amd64.msi
+  when: ansible_os_family == "Windows" and ansible_architecture == "64-bit"
+
+- name: 拷贝32bit msi安装文件到临时目录
+  win_copy:
+      src: "wmi_exporter-0.2.7-386.msi"
+      dest: c:\wmi_exporter-0.2.7-386.msi
+  when: ansible_os_family =="Windows" and ansible_architecture == "32-bit"
+
+- name: 安装临时目录中的32bit msi 文件
+  win_package:
+      path: c:\wmi_exporter-0.2.7-386.msi
+      product_id: '{B642B332-FB7D-433B-9C1D-3B19D5D5F26C}'
+      state: present
+  when: ansible_os_family == "Windows" and ansible_architecture == "32-bit"
+
+- name: 安装临时目录中的64bit msi 文件
+  win_package:
+      path: c:\wmi_exporter-0.2.7-amd64.msi
+      product_id: wmi_exporter-0.2.7-amd64.msi
+      state: present
+  when: ansible_os_family == "Windows" and ansible_architecture == "64-bit"

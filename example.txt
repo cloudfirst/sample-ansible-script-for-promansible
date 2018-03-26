@@ -1,0 +1,6 @@
+ansible-playbook -i /Users/luhya/Documents/AutoITManagement/geninventory.py /Users/luhya/Documents/AutoITManagement/playbook/routine/ping.yml -u luhya -k
+
+ansible-playbook example.yml --extra-vars "myhost=xxx myrole=yyy"
+ansible-playbook example.yml --extra-vars '{"pacman":"mrs","ghosts":["inky","pinky","clyde","sue"]}'
+ansible-playbook example.yml --extra-vars "@some_file.json"
+

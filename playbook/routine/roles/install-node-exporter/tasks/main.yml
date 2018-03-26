@@ -1,0 +1,34 @@
+- name: 安装supervisor软件包
+  apt:
+      name: supervisor
+      state: present
+      autoclean: yes
+      update_cache: yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: 创建luhya用户，如果不存在的话
+  user:
+      name: luhya
+      password: "$6$O5u0h7.8QTwi$bQKrLGyeemwkZ8WeZKIq9UExix5T0X9GyDGXLSrPTdyBD8/pBvGRwJbJSmNrobpLKU1vthuHql6lH9p5sWlh50"
+      shell: /bin/bash
+      groups: adm,sudo,cdrom,dip,plugdev,lpadmin,sambashare
+      generate_ssh_key: yes
+      ssh_key_bits: 1024
+      ssh_key_file: .ssh/id_rsa
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: 拷贝node-exporter 安装包到临时目录
+  copy:
+      src: "node-exporter_1.0_all.deb"
+      dest: /tmp/
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: 安装node-exporter for Linux
+  apt:
+      deb="/tmp/node-exporter_1.1_all.deb"
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: 重启supervisor服务
+  service:
+      name: supervisor
+      state: restarted
