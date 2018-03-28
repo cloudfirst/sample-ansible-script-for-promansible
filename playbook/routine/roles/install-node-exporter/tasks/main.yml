@@ -2,8 +2,6 @@
   apt:
       name: supervisor
       state: present
-      autoclean: yes
-      update_cache: yes
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: 创建luhya用户，如果不存在的话
