@@ -48,3 +48,6 @@
 |       `-- routinehandler.yml
 `-- README.md
 ```
+
+# sponsor
+如果觉得这个repository对你有用，欢迎打赏！(点击页面右上角的粉色sponsor按钮)
